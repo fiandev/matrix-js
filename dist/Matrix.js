@@ -49,11 +49,63 @@ class Matrix {
   
   /*
    * @param a (array) matrix
+   * @param b (array) matrix
+   * @return (array)
+   */
+  multiple (a, b) {
+    this.#check(a, b)
+    let result = []
+    
+    /* item counter */
+    let ic = 0
+    /* row counter */
+    let rc = 0
+    
+    a.forEach((row, i) => {
+      let section = 0
+      row.forEach((item, j) => {
+        section += item * b[rc][ic]
+        
+        result.push(section)
+        section = 0
+        if(rc < a.length - 1) rc++
+      })
+      
+      if (ic < row.length - 1) ic++
+    })
+    
+    return result
+  }
+  
+  /*
+   * @param any (number, float) matrix
+   * @param m (array) matrix
+   * @return (array)
+   */
+  multipleX (any, m) {
+    if ( !Array.isArray(m) ) this.error(`parameter must be Array '${ typeof m }' given`)
+    if (m.length !== 2) this.error(`Matrix must 2D, but ${ m.length }D given`)
+    if (typeof any !== "number") this.error(`arguments 2 must be number, ${ typeof any } given`)
+    
+    let result = []
+    m.forEach((row) => {
+      let section = []
+      row.forEach((item) => {
+        section.push(item * any)
+      })
+      
+      result.push(section)
+    })
+    
+    return result
+  }
+  /*
+   * @param a (array) matrix
    * @return (array)
    */
   det2D (a) {
-    this.#check(a, b)
-    this.Matrix(a, b, 2)
+    if ( !Array.isArray(a) ) this.error(`parameter must be Array '${ typeof a }' given`)
+    if (a.length !== 2) this.error(`Matrix must 2D, but ${ a.length }D given`)
     
     let result = []
     a.forEach((row, i) => {
@@ -73,8 +125,8 @@ class Matrix {
    * @return (array)
    */
   det3D (a) {
-    this.#check(a, b)
-    this.Matrix(a, b, 3)
+    if ( !Array.isArray(a) ) this.error(`parameter must be Array '${ typeof a }' given`)
+    if (a.length !== 3) this.error(`Matrix must 3D, but ${ a.length }D given`)
     
     let shadow = []
     a.forEach((row, i) => {
@@ -83,6 +135,7 @@ class Matrix {
       })
     })
     
+    // counter
     let c = 0
     
     // insert shadow
@@ -104,11 +157,11 @@ class Matrix {
    * @param (object) destructuring i, j, k
    * @return (array) matrix
    */
-  generate ({i, j, k}) {
+  generate ({i = 0, j = 0, k = 0}) {
     return [
-        [i ? i : 0],
-        [j ? j : 0],
-        [k ? k : 0]
+        [i],
+        [j],
+        [k]
       ]
   }
   
@@ -130,9 +183,12 @@ class Matrix {
   
   /*
    * @param a (array) matrix
-   * @return (number) total rows matrix
+   * @return (number)
    */
-  rows (a) {
+  length (a) {
+    if ( !Array.isArray(a) ) this.error(`parameter must be Array '${ typeof a }' given`)
+    if (a.length !== 3) this.error(`Matrix must 3D, but ${ a.length }D given`)
+    
     let result = 0
     a.forEach((row, i) => {
       row.forEach((item, j) => {
@@ -143,13 +199,94 @@ class Matrix {
     return Math.sqrt(result)
   }
   
+  /*
+   * @param a (array)
+   * @return (number)
+   */
+  rows (a) {
+    if ( !Array.isArray(a) ) this.error(`parameter must be Array '${ typeof a }' given`)
+    
+    return a.length
+  }
+  
+  /*
+   * @param a (array) matrix
+   * @param b (array) matrix
+   * @return (number) degree
+   */
+  angle (a, b) {
+    this.#matrixType(a, b, 3)
+    
+    let result = this.dot(a, b) / (this.length(a) * this.length(b))
+    let degree = Math.acos(result) * 180 / Math.PI
+    
+    return degree.toFixed()
+  }
+  
+  /*
+   * @param a (array) matrix
+   * @return (array)
+   */
+  invers (a) {
+    if ( !Array.isArray(a) ) this.error(`parameter must be Array '${ typeof a }' given`)
+    if (a.length !== 2) this.error(`Matrix must 2D, but ${ a.length }D given`)
+    
+    /* new matrix */
+    let b = [
+        [a[1][1], 0 - a[0][1]],
+        [0 - a[1][0], a[0][0]]
+      ]
+    
+    return this.multipleX(1 / this.det2D(a), b)
+  }
+  
+  /*
+   * @param a (array) matrix
+   * @return (array)
+   */
+  transpost(a) {
+    if ( !Array.isArray(a) ) this.error(`parameter must be Array '${ typeof a }' given`)
+    if (a.length < 2) this.error(`Matrix row must be at least 2, but ${ a.length } given`)
+    
+    /* 2D */
+    if (a.length === 2) {
+      return [ 
+        [a[0][0], a[1][0]],
+        [a[0][1], a[1][1]]
+      ]
+    } else {
+      let result = []
+      let dump = []
+      let c = 0
+      a.forEach((row, i) => {
+        result.push([])
+        let section = []
+        row.forEach((item, j) => {
+          section.push(row[j])
+        })
+        result[i].push( section[i] )
+      })
+      
+      return result
+    }
+    
+  }
+  
+  size (a) {
+    if ( !Array.isArray(a) ) this.error(`parameter must be Array '${ typeof a }' given`)
+    if (a.length < 2 || a.length > 3) this.error("invalid total rows of array matrix")
+    
+    return [ a.length, a[0].length ]
+  }
   /* exception */
+  
   /*
    * @param message (Error)
    * @param reference (string)
    */
   error(message, reference) {
-    throw new Error(message, reference)
+    let err = new Error(message, reference)
+    throw err.message
   }
   
   /*
@@ -166,11 +303,11 @@ class Matrix {
    * @param c (number)
    */
   #matrixType (a, b, c) {
-    if (a.length === c && b.length === c) this.error("matrix a and b must have same total rows")
+    this.#check(a, b)
+    
+    if (a.length !== c && b.length !== c) this.error("matrix a and b must have same total rows")
     if (a.length !== c || b.length !== c) this.error(`matrix a and b must have ${ c } rows, ${ a.length !== 2 ? a.length : b.length } given`)
   }
 }
 
-module.exports = {
-  Matrix
-}
+module.exports = Matrix
