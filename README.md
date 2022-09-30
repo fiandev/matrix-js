@@ -79,6 +79,6 @@ console.log(result) // result matrix a + b
 - rows (count total rows of matrix)
 - invers (return invers matrix)
 - transpost (return transpost matrix)
-- size (return dimension of matrix) (comming soon)
+- size (return dimension of matrix)
 
 > built with ❤️ by Fiandev
