@@ -1,10 +1,14 @@
 {
-  "name": "matrix-js",
+  "name": "matrix-nodejs",
   "version": "0.0.1",
   "description": "light module to create, count, operate and manipulate matrix array 2D or 3D",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiandev/matrix-js.git"
   },
   "keywords": [
     "js",

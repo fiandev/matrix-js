@@ -4,7 +4,7 @@
 
 # installation
 ```shell
-npm install matrix-js --save
+npm install matrix-nodejs --save
 ```
 
 # how to usage
@@ -12,7 +12,7 @@ npm install matrix-js --save
 ## declare matrix
 
 ```javascript
-const matrix = require("matrix-js")
+const matrix = require("matrix-nodejs")
 
 /* matrix a (2D) */
 let a = [
@@ -40,11 +40,12 @@ let c = matrix.generate({
 
 - addition (matrix a + matrix b)
 - subtraction (matrix a - matrix b)
-- det2D (determine matrix 2D)
-- det3D (determine matrix 3D)
+- det2D (determinant matrix 2D)
+- det3D (determinant matrix 3D)
 - generate (generate matrix)
 - dot (matrix a . matrix b)
 - rows (count total rows of matrix)
+- multiple (matrix a * matrix b) (coming soon)
 - length (count length of vector) (coming soon)
 - alpha (find angle of two vector) (coming soon)
 
@@ -52,9 +53,11 @@ let c = matrix.generate({
 ### addition matrix
 
 ```javascript
-const matrix = require("matrix-js")
+const matrix = require("matrix-nodejs")
 
-matrix.addition(a, b) // return array matrix
+const result = matrix.addition(a, b) // return array matrix
+
+console.log(result) // result matrix a + b
 ```
 
 
