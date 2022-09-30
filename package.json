@@ -12,5 +12,9 @@
     "matrix"
   ],
   "author": "fiandev",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fiandev/matrix-js/issues"
+  },
+  "homepage": "https://github.com/fiandev/matrix-js#readme"
 }
