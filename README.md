@@ -1,5 +1,9 @@
 # Matrix js
 
+![version](https://img.shields.io/npm/v/matrix-nodejs?label=matrix-nodejs)
+
+![size](https://img.shields.io/bundlephobia/min/matrix-nodejs?label=size)
+
 ### light module to create, count, operate and manipulate matrix array 2D or 3D
 
 # installation
@@ -9,8 +13,10 @@
 git clone https://github.com/fiandev/matrix-js
 ```
 
-## install via npm (not published)
+## install dependencies
+
 ```shell
+# using npm
 npm install matrix-nodejs --save
 ```
 
