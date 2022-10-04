@@ -63,10 +63,11 @@ class Matrix {
     
     a.forEach((row, i) => {
       let section = 0
+      result.push([])
       row.forEach((item, j) => {
         section += item * b[rc][ic]
+        result[i].push(section)
         
-        result.push(section)
         section = 0
         if(rc < a.length - 1) rc++
       })

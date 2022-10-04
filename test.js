@@ -24,4 +24,4 @@ let c = [
     [4, 8, 6]
   ]
   
-console.log( matrix.size(c) )
+console.log( matrix.multiple(c, c) )
