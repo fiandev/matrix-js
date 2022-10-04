@@ -1,7 +1,7 @@
 {
   "name": "matrix-nodejs",
-  "version": "1.0.0",
-  "description": "light module to create, count, operate and manipulate matrix array 2D or 3D",
+  "version": "1.0.2",
+  "description": "light module to create, count, operate, and manipulate. matrix 2D, matrix 3D and vector",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"

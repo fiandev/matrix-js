@@ -1,9 +1,13 @@
 const Matrix = require("./dist/Matrix")
+const Vector = require("./dist/Vector")
 
-/* initialize object matrix from class Matrix */
-const matrix = new Matrix
+/* initialize object */
+const matrix = new Matrix()
+const vector = new Vector
 
 module.exports = {
   Matrix, // class
-  matrix // object
+  matrix, // object
+  vector,
+  Vector
 }

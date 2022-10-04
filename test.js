@@ -1,27 +1,21 @@
 /*
 try {
-  const matrix = require("./index")
+  const { Matrix, matrix, vector } = require("./index")
   console.log(`test passed!`)
 } catch (err) {
   throw err
 }
 */
 
-const { Matrix, matrix } = require("./index")
 
-let a = matrix.generate({
-  i: 1
-})
-  
-let b = matrix.generate({
+let a = vector.generate({
   i: 1,
-  j: 1
+  j: 2,
+  k: 3
 })
 
-let c = [
-    [2, 0, 3],
-    [-1, 5, 2],
-    [4, 8, 6]
-  ]
-  
-console.log( matrix.multiple(c, c) )
+// example string vector (strict space)
+let b = vector.destruct("- 2j + 3i - k") // return array
+
+let AxB = vector.cross(a, b) // return object
+console.log(AxB.matrix) // [ -11, -5, 7 ]
