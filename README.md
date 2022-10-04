@@ -4,7 +4,7 @@
 
 ![size](https://img.shields.io/bundlephobia/min/matrix-nodejs?label=size)
 
-### light module to create, count, operate and manipulate matrix array 2D or 3D
+### light module to create, count, operate, and manipulate. matrix 2D, matrix 3D and vector
 
 # installation
 ## clone this project
