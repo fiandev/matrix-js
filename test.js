@@ -1,11 +1,11 @@
 /*
 try {
-  const { Matrix, matrix, vector } = require("./index")
   console.log(`test passed!`)
 } catch (err) {
   throw err
 }
 */
+const { Matrix, matrix, vector } = require("./index")
 
 
 let a = vector.generate({
@@ -18,4 +18,8 @@ let a = vector.generate({
 let b = vector.destruct("- 2j + 3i - k") // return array
 
 let AxB = vector.cross(a, b) // return object
-console.log(AxB.matrix) // [ -11, -5, 7 ]
+let angle = vector.angle(a, b) // return number
+
+console.log(AxB.string) // - 11i - 5j + 7k
+console.log(AxB.matrix) // [ [-11], [-5], [7] ]
+console.log(angle) // 86 degree

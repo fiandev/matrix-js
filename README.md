@@ -71,15 +71,6 @@ let b = [
   
 // initialize matrix A from array a
 let A = new Matrix(a)
-
-/* generate matrix from I-J-K */
-
-// example 2i - j + 3k
-let c = vector.generate({
-  i: 2,
-  j: -1,
-  k: 3
-})
 ```
 
 ## example usage
@@ -153,6 +144,8 @@ console.log(multiple) // result 1/2 * matrix a
 ```javascript
 const { vector } = require("matrix-nodejs")
 
+/* generate arrat vector from I-J-K */
+// example i + 2j + 3k
 let a = vector.generate({
   i: 1,
   j: 2,
@@ -163,8 +156,11 @@ let a = vector.generate({
 let b = vector.destruct("- 2j + 3i - k") // return array
 
 let AxB = vector.cross(a, b) // return object
+let angle = vector.angle(a, b) // return number
+
 console.log(AxB.string) // - 11i - 5j + 7k
-console.log(AxB.matrix) // [ -11, -5, 7 ]
+console.log(AxB.matrix) // [ [-11], [-5], [7] ]
+console.log(angle) // 86 degree
 ```
 
 # list properties
@@ -178,7 +174,6 @@ console.log(AxB.matrix) // [ -11, -5, 7 ]
 - multiple (matrix a * matrix b)
 - multipleX (any * a matrix)
 - length (count total length of matrix)
-- angle (find angle of two vector)
 - rows (count total rows of matrix)
 - invers (return invers matrix)
 - transpost (return transpost matrix)
@@ -188,5 +183,6 @@ console.log(AxB.matrix) // [ -11, -5, 7 ]
 - generate (generate array vector)
 - destruct (destruct array vector from string)
 - cross (multiple cross two vector)
+- angle (find angle of two vector)
 
 > built with ❤️ by Fiandev

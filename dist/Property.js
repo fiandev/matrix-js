@@ -228,9 +228,12 @@ class Property {
     
     let result = 0
     a.forEach((row, i) => {
-      row.forEach((item, j) => {
-        result += item**2
-      })
+      if (Array.isArray(row)) {
+        row.forEach((item, j) => {
+          let section = !isNaN(item**2) ? item**2 : 0
+          result += section
+        })
+      }
     })
     
     return Math.sqrt(result)
@@ -245,24 +248,6 @@ class Property {
     if ( !Array.isArray(a) ) throw new Error(`Argument must be Array '${ typeof a }' given`)
     
     return a.length
-  }
-  
-  /*
-   * @param a (array) matrix
-   * @param b (array) matrix
-   * @return (number) degree
-   */
-  angle () {
-    if (this.matrix) throw new Error("can't call this method inside a initialize matrix")
-    let a = arguments[0] ? arguments[0] : []
-    let b = arguments[1] ? arguments[1] : []
-    
-    if ( a.length !== b.length || a.filter((pre, curr) => pre.length === curr.length) === b.filter((pre, curr) => pre.length === curr.length) ) throw new Error(`matrix must have same row and column!`)
-    
-    let result = this.dot(a, b) / (this.length(a) * this.length(b))
-    let degree = Math.acos(result) * 180 / Math.PI
-    
-    return degree.toFixed()
   }
   
   /*
