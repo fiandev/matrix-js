@@ -1,6 +1,6 @@
 {
   "name": "matrix-nodejs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "light module to create, count, operate, and manipulate. matrix 2D, matrix 3D and vector",
   "main": "index.js",
   "scripts": {

@@ -1,19 +1,13 @@
 # Matrix js
 
 ![version](https://img.shields.io/npm/v/matrix-nodejs?label=matrix-nodejs)
-
 ![size](https://img.shields.io/bundlephobia/min/matrix-nodejs?label=size)
+![matrix-nodejs](https://img.shields.io/npm/dw/matrix-nodejs)
 
 ### light module to create, count, operate, and manipulate. matrix 2D, matrix 3D and vector
 
 # installation
-## clone this project
-
-```shell
-git clone https://github.com/fiandev/matrix-js
-```
-
-## install dependencies
+## install using npm
 
 ```shell
 # using npm
@@ -135,7 +129,7 @@ const C = new Matrix(c)
 C.multipleX(1/2) // return c * 1/2
 C.multiple(b) // return c * 1/2
 
-console.log(AxB) // result matrix a + b
+console.log(AxB) // result matrix a * b
 console.log(multiple) // result 1/2 * matrix a
 ```
 

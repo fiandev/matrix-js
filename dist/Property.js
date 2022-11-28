@@ -8,16 +8,7 @@ class Property {
    * @param b (array) matrix
    * @return (array)
    */
-  addition () {
-    let a, b
-    if (!this.matrix) {
-      a = arguments[0] ? arguments[0] : []
-      b = arguments[1] ? arguments[1] : []
-    } else {
-      a = this.matrix
-      b = arguments[0] ? arguments[0] : []
-    }
-    
+  addition (a = this.matrix ? this.matrix : [], b = []) {
     let result = []
     let longest = a.length >= b.length ? a : b
     let c = a.length >= b.length ? b : a
@@ -39,15 +30,7 @@ class Property {
    * @param b (array) matrix
    * @return (array)
    */
-  subtraction () {
-    let a, b
-    if (!this.matrix) {
-      a = arguments[0] ? arguments[0] : []
-      b = arguments[1] ? arguments[1] : []
-    } else {
-      a = this.matrix
-      b = arguments[0] ? arguments[0] : []
-    }
+  subtraction (a = this.matrix ? this.matrix : [], b = []) {
     let result = []
     let longest = a.length >= b.length ? a : b
     let c = a.length >= b.length ? b : a
@@ -69,38 +52,24 @@ class Property {
    * @param b (array) matrix
    * @return (array)
    */
-  multiple () {
-    let a, b
-    if (!this.matrix) {
-      a = arguments[0] ? arguments[0] : []
-      b = arguments[1] ? arguments[1] : []
-    } else {
-      a = this.matrix
-      b = arguments[0] ? arguments[0] : []
+  multiple (a = this.matrix ? this.matrix : [], b = []) {
+    var aNumRows = a.length, 
+        aNumCols = a[0].length,
+        bNumRows = b.length, 
+        bNumCols = b[0].length,
+        m = new Array(aNumRows);  // initialize array of rows
+    
+    for (var r = 0; r < aNumRows; ++r) {
+      m[r] = new Array(bNumCols); // initialize the current row
+      for (var c = 0; c < bNumCols; ++c) {
+        m[r][c] = 0;             // initialize the current cell
+        for (var i = 0; i < aNumCols; ++i) {
+          m[r][c] += a[r][i] * b[i][c];
+        }
+      }
     }
     
-    let result = []
-    
-    /* item counter */
-    let ic = 0
-    /* row counter */
-    let rc = 0
-    
-    a.forEach((row, i) => {
-      let section = 0
-      result.push([])
-      row.forEach((item, j) => {
-        section += item * b[rc][ic]
-        result[i].push(section)
-        
-        section = 0
-        if(rc < a.length - 1) rc++
-      })
-      
-      if (ic < row.length - 1) ic++
-    })
-    
-    return result
+    return m;
   }
   
   /*
@@ -108,16 +77,7 @@ class Property {
    * @param m (array) matrix
    * @return (array)
    */
-  multipleX () {
-    let any, m
-    if (!this.matrix) {
-      any = arguments[0] ? arguments[0] : 1
-      m = arguments[1] ? arguments[1] : []
-    } else {
-      any = arguments[0] ? arguments[0] : 1
-      m = this.matrix
-    }
-    
+  multipleX (any = 1, m = this.matrix ? this.matrix : []) {
     if ( !Array.isArray(m) ) throw new Error(`Argument must be Array '${ typeof m }' given`)
     if (typeof any !== "number") throw new Error(`arguments 2 must be number, ${ typeof any } given`)
     
@@ -133,6 +93,7 @@ class Property {
     
     return result
   }
+  
   /*
    * @param a (array) matrix
    * @return (array)
@@ -196,16 +157,7 @@ class Property {
    * @param b (array) matrix
    * @return (number)
    */
-  dot () {
-    let a, b
-    if (!this.matrix) {
-      a = arguments[0] ? arguments[0] : []
-      b = arguments[1] ? arguments[1] : []
-    } else {
-      a = this.matrix
-      b = arguments[0] ? arguments[0] : []
-    }
-    
+  dot (a = this.matrix ? this.matrix : arguments[0]) {
     let result = 0
     a.forEach((row, i) => {
       row.forEach((item, j) => {

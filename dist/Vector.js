@@ -18,8 +18,7 @@ class Vector {
    * @param str (string)
    * @return (array) vector
    */
-  destruct () {
-    const str = arguments[0] ? arguments[0] : ""
+  destruct (str = "") {
     if (typeof str !== "string") throw new Error(`argument must be string, but ${ typeof str } given`)
     
     let result = []
@@ -49,16 +48,8 @@ class Vector {
    * @param b (array) matrix
    * @return (object)
    */
-  cross () {
-    let a, b
+  cross (a = this.matrix ? this.matrix : [], b = []) {
     let m = []
-    if (!this.matrix) {
-      a = arguments[0] ? arguments[0] : []
-      b = arguments[1] ? arguments[1] : []
-    } else {
-      a = this.matrix
-      b = arguments[0] ? arguments[0] : []
-    }
     
     m[0] = a.map((item) => item)
     m[1] = b.map((item) => item)
@@ -91,10 +82,7 @@ class Vector {
    * @param b (array) matrix
    * @return (number) degree
    */
-  angle () {
-    let a = arguments[0] ? arguments[0] : []
-    let b = arguments[1] ? arguments[1] : []
-    
+  angle (a = [], b = []) {
     if ( a.length !== b.length || a.filter((pre, curr) => pre.length === curr.length) === b.filter((pre, curr) => pre.length === curr.length) ) throw new Error(`matrix must have same row and column!`)
     
     let result = new Matrix(a).dot(b) / ( new Matrix(a).length() * new Matrix(b).length() )
